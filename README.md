@@ -23,24 +23,25 @@ $ ssh-keygen -t rsa -f ~/.ssh/code-deploy-demo -C cd-demo -P ""
 
   then the name of the created bucket is `codedeploydemo-734`. Save this bucket name, you will upload the sample application revision to that bucket.
 
-4. Change directory into `sample-app`. And run the following command to create application revision and upload it to S3 bucket (make sure to change the name of the bucket). 
+4. Change directory into `sample-app`. And run the following command to create application revision and upload it to S3 bucket (make sure to change the name of the bucket [and region if you changed it in terraform]). 
 
   ```
   $ cd sample-app
-  $ aws deploy push \
+  $ aws --region eu-west-1 deploy push \
       --application-name Sample_App \
       --s3-location s3://codedeploydemo-734/SampleApp.zip
   ```
-  This command won't work if your current aws cli is not configured to work with the region specified in terraform. If it doesn't work make sure that default region in you aws configuration file is the same as the one specified in terraform.
 
   This command bundles the files from the current directory into a single archive file named SampleApp.zip, uploads the revision to the `codedeploydemo-734` bucket, and registers information with AWS CodeDeploy about the uploaded revision.
 
-5. Create a deployment (make sure to change the name of the bucket):
+5. Create a deployment (make sure to change the name of the bucket [and region if you changed it in terraform]):
+
   ```
-  $ aws deploy create-deployment \
+  $ aws --region eu-west-1 deploy create-deployment \
       --application-name Sample_App \
       --deployment-config-name CodeDeployDefault.OneAtATime \
       --deployment-group-name Sample_DepGroup \
       --s3-location bucket=codedeploydemo-734,bundleType=zip,key=SampleApp.zip
   ```
+  
 6. Access the Sample application by instace's public IP. Get the instance's public IP from terraform output and put it in your browser.
