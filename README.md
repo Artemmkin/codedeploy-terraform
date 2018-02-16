@@ -21,7 +21,7 @@ $ ssh-keygen -t rsa -f ~/.ssh/code-deploy-demo -C cd-demo -P ""
   codedeploydemo-734.s3.amazonaws.com
   ```
 
-  then the name of the created bucket is `codedeploydemo-734`. Save this bucket name, will upload our sample application revision to that bucket.
+  then the name of the created bucket is `codedeploydemo-734`. Save this bucket name, you will upload the sample application revision to that bucket.
 
 4. Change directory into `sample-app`. And run the following command to create application revision and upload it to S3 bucket (make sure to change the name of the bucket). 
 
