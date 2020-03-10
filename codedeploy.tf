@@ -5,13 +5,13 @@ resource "aws_codedeploy_app" "main" {
 
 # create a deployment group
 resource "aws_codedeploy_deployment_group" "main" {
-  app_name              = "${aws_codedeploy_app.main.name}"
+  app_name              = aws_codedeploy_app.main.name
   deployment_group_name = "Sample_DepGroup"
-  service_role_arn      = "${aws_iam_role.codedeploy_service.arn}"
+  service_role_arn      = aws_iam_role.codedeploy_service.arn
 
   deployment_config_name = "CodeDeployDefault.OneAtATime" # AWS defined deployment config
 
-  ec2_tag_filter = {
+  ec2_tag_filter {
     key   = "Name"
     type  = "KEY_AND_VALUE"
     value = "CodeDeployDemo"
